@@ -1,0 +1,286 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="{% static 'js/home.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <title>Bookly | Developer Portfolio & Meeting Booking</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+
+            <a href="#home" class="logo">Bookly</a>
+
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#about">About Me</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+
+                <a href="{% url 'reserve:booking-form' %}" class="button">
+                    Book an Appointment
+                </a>
+
+                {% if request.user.is_authenticated %}
+
+                    <div class="user-menu">
+
+                        <button
+                            type="button"
+                            class="user-icon"
+                            id="userMenuButton"
+                            aria-label="User menu"
+                            aria-expanded="false"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+                            </svg>
+                        </button>
+
+                        <div class="user-dropdown" id="userDropdown">
+
+                            <a href="{% url 'reserve:my_bookings_page' %}">
+                                My Bookings
+                            </a>
+
+                            <form
+                                method="POST"
+                                action="{% url 'account:logout' %}"
+                                class="logout-form"
+                            >
+                                {% csrf_token %}
+                                <button type="submit">Logout</button>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                {% else %}
+
+                    <a href="{% url 'account:login' %}" class="login-button">
+                        Login
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <p class="subtitle">
+                        SOFTWARE DEVELOPER & BACKEND ENGINEER
+                    </p>
+
+                    <h1>
+                        Building Modern Web Applications & Backend Systems
+                    </h1>
+
+                    <p>
+                        I develop web applications, REST APIs, and backend
+                        systems using Python and Django. Let's connect and
+                        discuss your ideas, projects, or potential collaboration.
+                    </p>
+
+                    <a href="{% url 'reserve:booking-form' %}" class="button">
+                        Schedule a Meeting
+                    </a>
+
+                </div>
+
+                <div class="hero-image">
+                    <img
+                        src="{% static 'images/1.avif' %}"
+                        alt="Software developer working on a computer"
+                    >
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>What I Can Help With</h2>
+                    <p>
+                        Exploring ideas and building reliable software solutions.
+                    </p>
+                </div>
+
+                <div class="services">
+
+                    <article class="service-card">
+
+                        <img
+                            src="{% static 'images/2.avif' %}"
+                            alt="Backend development and computer hardware"
+                        >
+
+                        <div class="service-info">
+
+                            <h3>Backend Development</h3>
+
+                            <p>
+                                Building scalable backend applications
+                                with Python, Django, and PostgreSQL.
+                            </p>
+
+                            <a href="{% url 'reserve:home' %}" class="button">
+                                Discuss a Project
+                            </a>
+
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+
+                        <img
+                            src="{% static 'images/3.avif' %}"
+                            alt="API and server infrastructure"
+                        >
+
+                        <div class="service-info">
+
+                            <h3>REST API Development</h3>
+
+                            <p>
+                                Designing and developing secure APIs
+                                for modern web and mobile applications.
+                            </p>
+
+                            <a href="{% url 'reserve:home' %}" class="button">
+                                Discuss a Project
+                            </a>
+
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+
+                        <img
+                            src="{% static 'images/4.avif' %}"
+                            alt="Database management and data architecture"
+                        >
+
+                        <div class="service-info">
+
+                            <h3>Database Design</h3>
+
+                            <p>
+                                Designing structured databases and
+                                managing data efficiently with SQL.
+                            </p>
+
+                            <a href="{% url 'reserve:home' %}" class="button">
+                                Discuss a Project
+                            </a>
+
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container about-content">
+
+                <div class="section-title">
+                    <h2>About Me</h2>
+                </div>
+
+                <p>
+                    I'm a software developer focused on backend development
+                    and building practical web applications. I work with
+                    Python, Django, Django REST Framework, and relational
+                    databases to create reliable and maintainable solutions.
+                    I'm always learning, improving my skills, and exploring
+                    new technologies.
+                </p>
+
+                <a href="{% url 'reserve:booking-form' %}" class="button">
+                    Let's Connect
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Get in Touch</h2>
+                    <p>
+                        Have a project idea or want to discuss a collaboration?
+                        Feel free to get in touch.
+                    </p>
+                </div>
+
+                <div class="contact-info">
+
+                    <div class="contact-item">
+                        <strong>Specialization</strong>
+                        <span>Backend Development</span>
+                    </div>
+
+                    <div class="contact-item">
+                        <strong>Technologies</strong>
+                        <span>Python · Django · DRF · SQL</span>
+                    </div>
+
+                    <div class="contact-item">
+                        <strong>Meetings</strong>
+                        <span>Available by appointment</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                &copy; 2026 Bookly. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

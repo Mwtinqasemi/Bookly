@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings | Bookly</title>
+
+    <link rel="stylesheet" href="{% static 'css/my_bookings.css' %}">
+
+    <script>
+        const bookingsUrl = "{% url 'reserve:my-bookings' %}";
+        const cancelUrl = "{% url 'reserve:delete-booking' reservation_id=0 %}";
+    </script>
+
+    <script src="{% static 'js/my_bookings.js' %}" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="/" class="logo">Bookly</a>
+            <a href="/" class="back-link">Back to Home</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="bookings-wrapper">
+
+            <div class="page-heading">
+                <h1>My Bookings</h1>
+                <p>Manage your upcoming appointments.</p>
+            </div>
+
+            <div id="bookings-container">
+                <div class="message-box">Loading bookings...</div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2026 Bookly. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>

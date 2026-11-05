@@ -1,0 +1,564 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Appointment | Bookly</title>
+
+    <script src="{% static 'js/snippet.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <main class="cl-appt04-demo">
+        <section
+            class="cl-appt04"
+            aria-labelledby="cl-appt04-title"
+            data-availability-url="{% url 'reserve:booking' %}"
+            data-hold-url="{% url 'reserve:hold' %}"
+            data-release-url="{% url 'reserve:release' %}"
+            data-login-url="{% url 'account:login' %}"
+            data-authenticated="{{ request.user.is_authenticated|yesno:'true,false' }}"
+        >
+
+            <aside class="cl-appt04__host">
+                <div class="cl-appt04__person">
+                    <span class="cl-appt04__avatar" aria-hidden="true">
+                        MQ
+                    </span>
+
+                    <p class="cl-appt04__host-name">
+                        Matin Qasemi
+                        <span>Software Developer</span>
+                    </p>
+                </div>
+
+                <h1 class="cl-appt04__title" id="cl-appt04-title">
+                    Schedule a Meeting
+                </h1>
+
+                <ul class="cl-appt04__facts">
+                    <li>
+                        <svg
+                            viewBox="0 0 20 20"
+                            width="18"
+                            height="18"
+                            aria-hidden="true"
+                        >
+                            <circle
+                                cx="10"
+                                cy="10"
+                                r="7.5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+                            <path
+                                d="M10 6v4.2l2.8 1.8"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                        30 minutes
+                    </li>
+
+                    <li>
+                        <svg
+                            viewBox="0 0 20 20"
+                            width="18"
+                            height="18"
+                            aria-hidden="true"
+                        >
+                            <rect
+                                x="2.5"
+                                y="5"
+                                width="10.5"
+                                height="10"
+                                rx="2"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+                            <path
+                                d="m13 9 4.5-2.5v7L13 11"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                        Online meeting
+                    </li>
+
+                    <li>
+                        <svg
+                            viewBox="0 0 20 20"
+                            width="18"
+                            height="18"
+                            aria-hidden="true"
+                        >
+                            <circle
+                                cx="10"
+                                cy="10"
+                                r="7.5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+                            <path
+                                d="M2.5 10h15M10 2.5c2.2 2.3 3.2 4.8 3.2 7.5s-1 5.2-3.2 7.5c-2.2-2.3-3.2-4.8-3.2-7.5s1-5.2 3.2-7.5z"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+                        </svg>
+                        Available for online meetings
+                    </li>
+                </ul>
+
+                <p class="cl-appt04__desc">
+                    Book a meeting to discuss your project, share your ideas, or explore
+                    potential collaboration opportunities. Choose a convenient date and
+                    time, and I'll be happy to connect with you.
+                </p>
+
+                <div class="cl-appt04__picked" data-picked hidden>
+                    <p class="cl-appt04__picked-label">Your selection</p>
+                    <p class="cl-appt04__picked-value" data-picked-value></p>
+                </div>
+            </aside>
+
+            <div class="cl-appt04__stage">
+
+                <!-- Step 1: Pick a date and time -->
+                <div class="cl-appt04__pick" data-view="pick">
+
+                    <div class="cl-appt04__cal-pane">
+                        <h2 class="cl-appt04__h2">
+                            Select a date &amp; time
+                        </h2>
+
+                        <div class="cl-appt04__month">
+                            <button
+                                class="cl-appt04__nav"
+                                type="button"
+                                data-prev
+                                aria-label="Previous month"
+                            >
+                                <svg
+                                    viewBox="0 0 20 20"
+                                    width="18"
+                                    height="18"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M12.5 4.5 7 10l5.5 5.5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </button>
+
+                            <h3
+                                class="cl-appt04__month-label"
+                                id="cl-appt04-month"
+                                data-month
+                                aria-live="polite"
+                            >
+                                Month
+                            </h3>
+
+                            <button
+                                class="cl-appt04__nav"
+                                type="button"
+                                data-next
+                                aria-label="Next month"
+                            >
+                                <svg
+                                    viewBox="0 0 20 20"
+                                    width="18"
+                                    height="18"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M7.5 4.5 13 10l-5.5 5.5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <table
+                            class="cl-appt04__cal"
+                            aria-labelledby="cl-appt04-month"
+                            aria-describedby="cl-appt04-cal-help"
+                        >
+                            <thead>
+                                <tr>
+                                    <th scope="col" abbr="Monday">Mon</th>
+                                    <th scope="col" abbr="Tuesday">Tue</th>
+                                    <th scope="col" abbr="Wednesday">Wed</th>
+                                    <th scope="col" abbr="Thursday">Thu</th>
+                                    <th scope="col" abbr="Friday">Fri</th>
+                                    <th scope="col" abbr="Saturday">Sat</th>
+                                    <th scope="col" abbr="Sunday">Sun</th>
+                                </tr>
+                            </thead>
+
+                            <tbody data-days></tbody>
+                        </table>
+
+                        <p class="cl-appt04__help" id="cl-appt04-cal-help">
+                            Bold dates have free times. Arrow keys move between days;
+                            Page Up and Page Down change month.
+                        </p>
+
+                        <p class="cl-appt04__zone">
+                            <svg
+                                viewBox="0 0 20 20"
+                                width="16"
+                                height="16"
+                                aria-hidden="true"
+                            >
+                                <circle
+                                    cx="10"
+                                    cy="10"
+                                    r="7.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+                                <path
+                                    d="M2.5 10h15M10 2.5c2.2 2.3 3.2 4.8 3.2 7.5s-1 5.2-3.2 7.5c-2.2-2.3-3.2-4.8-3.2-7.5s1-5.2 3.2-7.5z"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+                            </svg>
+
+                            <span>
+                                Times shown in <strong data-zone>your time zone</strong>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="cl-appt04__times-pane" data-times-pane>
+                        <div class="cl-appt04__times-head">
+                            <h3
+                                class="cl-appt04__day"
+                                id="cl-appt04-day"
+                                data-day
+                            >
+                                Pick a day
+                            </h3>
+
+                            <div
+                                class="cl-appt04__fmt"
+                                role="group"
+                                aria-label="Time format"
+                            >
+                                <button
+                                    class="cl-appt04__fmt-btn"
+                                    type="button"
+                                    data-fmt="12"
+                                    aria-pressed="true"
+                                >
+                                    12h
+                                </button>
+
+                                <button
+                                    class="cl-appt04__fmt-btn"
+                                    type="button"
+                                    data-fmt="24"
+                                    aria-pressed="false"
+                                >
+                                    24h
+                                </button>
+                            </div>
+                        </div>
+
+                        <ul
+                            class="cl-appt04__times"
+                            data-times
+                            aria-labelledby="cl-appt04-day"
+                        ></ul>
+                    </div>
+
+                </div>
+
+                <!-- Step 2: Enter booking details -->
+                <form
+                    class="cl-appt04__details"
+                    data-view="details"
+                    novalidate
+                    hidden
+                    aria-labelledby="cl-appt04-details-title"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        class="cl-appt04__back"
+                        type="button"
+                        data-back
+                    >
+                        <svg
+                            viewBox="0 0 20 20"
+                            width="18"
+                            height="18"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M12.5 4.5 7 10l5.5 5.5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                        Change time
+                    </button>
+
+                    <h2
+                        class="cl-appt04__h2"
+                        id="cl-appt04-details-title"
+                    >
+                        Enter your details
+                    </h2>
+
+                    <p class="cl-appt04__when" data-when></p>
+
+                    <div class="cl-appt04__field" data-field>
+                        <label
+                            class="cl-appt04__label"
+                            for="cl-appt04-name"
+                        >
+                            Name
+                        </label>
+
+                        <input
+                            class="cl-appt04__control"
+                            id="cl-appt04-name"
+                            name="name"
+                            type="text"
+                            required
+                            minlength="2"
+                            autocomplete="name"
+                            data-msg-required="Please enter your name."
+                            aria-describedby="cl-appt04-name-error"
+                        >
+
+                        <p
+                            class="cl-appt04__error"
+                            id="cl-appt04-name-error"
+                            data-error
+                        ></p>
+                    </div>
+
+                    <div class="cl-appt04__field" data-field>
+                        <label
+                            class="cl-appt04__label"
+                            for="cl-appt04-email"
+                        >
+                            Email
+                        </label>
+
+                        <input
+                            class="cl-appt04__control"
+                            id="cl-appt04-email"
+                            name="email"
+                            type="email"
+                            required
+                            autocomplete="email"
+                            data-msg-required="Please enter your email."
+                            data-msg-type="Please enter a valid email, like alex@example.com."
+                            aria-describedby="cl-appt04-email-hint cl-appt04-email-error"
+                        >
+
+                        <p
+                            class="cl-appt04__hint"
+                            id="cl-appt04-email-hint"
+                        >
+                            Please enter the email address associated with your booking.
+                        </p>
+
+                        <p
+                            class="cl-appt04__error"
+                            id="cl-appt04-email-error"
+                            data-error
+                        ></p>
+                    </div>
+
+                    <div class="cl-appt04__field" data-field>
+                        <label
+                            class="cl-appt04__label"
+                            for="cl-appt04-notes"
+                        >
+                            What would you like to cover?
+                            <span class="cl-appt04__opt">(optional)</span>
+                        </label>
+
+                        <textarea
+                            class="cl-appt04__control cl-appt04__control--area"
+                            id="cl-appt04-notes"
+                            name="notes"
+                            rows="4"
+                            maxlength="500"
+                            autocomplete="off"
+                        ></textarea>
+                    </div>
+
+                    <div class="cl-appt04__actions">
+                        <button
+                            class="cl-appt04__primary"
+                            type="submit"
+                            data-submit
+                        >
+                            <span data-submit-label>Schedule call</span>
+                        </button>
+
+                        <p class="cl-appt04__fine">
+                            Your appointment will be confirmed after submission.
+                        </p>
+                    </div>
+                </form>
+
+                <!-- Step 3: Booking confirmation -->
+                <div
+                    class="cl-appt04__done"
+                    data-view="done"
+                    tabindex="-1"
+                    hidden
+                    aria-labelledby="cl-appt04-done-title"
+                >
+                    <span
+                        class="cl-appt04__done-icon"
+                        aria-hidden="true"
+                    >
+                        <svg viewBox="0 0 24 24" width="28" height="28">
+                            <path
+                                d="m5 12.5 4.5 4.5L19 7.5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </span>
+
+                    <h2
+                        class="cl-appt04__done-title"
+                        id="cl-appt04-done-title"
+                    >
+                        You're scheduled
+                    </h2>
+
+                    <p class="cl-appt04__done-text" data-done-text></p>
+
+                    <dl class="cl-appt04__done-list">
+                        <div>
+                            <dt>What</dt>
+                            <dd>Appointment with Matin Qasemi</dd>
+                        </div>
+
+                        <div>
+                            <dt>When</dt>
+                            <dd data-done-when></dd>
+                        </div>
+
+                        <div>
+                            <dt>Time zone</dt>
+                            <dd data-done-zone></dd>
+                        </div>
+
+                        <div>
+                            <dt>Where</dt>
+                            <dd>Online meeting</dd>
+                        </div>
+                    </dl>
+
+                    <div class="cl-appt04__cal-add">
+                        <p class="cl-appt04__cal-add-label">
+                            Add to calendar
+                        </p>
+
+                        <button
+                            class="cl-appt04__secondary"
+                            type="button"
+                            data-ics
+                        >
+                            <svg
+                                viewBox="0 0 20 20"
+                                width="18"
+                                height="18"
+                                aria-hidden="true"
+                            >
+                                <rect
+                                    x="3"
+                                    y="4.5"
+                                    width="14"
+                                    height="12.5"
+                                    rx="2"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+                                <path
+                                    d="M3 8.5h14M7 2.5v4M13 2.5v4M10 10.5v4M8 12.5h4"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+
+                            Download .ics file
+                        </button>
+                    </div>
+
+                    <p class="cl-appt04__fine">
+                        Your appointment has been successfully booked.
+                    </p>
+
+                    <button
+                        class="cl-appt04__link-btn"
+                        type="button"
+                        data-again
+                    >
+                        Schedule another call
+                    </button>
+                </div>
+
+            </div>
+
+            <p
+                class="cl-appt04__sr"
+                role="status"
+                aria-live="polite"
+                data-live
+            ></p>
+
+        </section>
+    </main>
+
+     <script>
+        console.log("Template loaded");
+        console.log("Calendar:", document.querySelector("[data-days]"));
+        console.log("Times:", document.querySelector("[data-times]"));
+    </script>
+
+</body>
+
+</html>
