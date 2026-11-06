@@ -15,8 +15,6 @@ from rest_framework.views import APIView
 from .models import Reservation
 from .serializers import ReservationSerializer
 
-from utils.turn_maker import create_reservations
-
 HOLD_DURATION = timedelta(minutes=10)
 
 def home(request):
