@@ -6,7 +6,7 @@ The platform includes a RESTful API, interactive API documentation, automated ap
 
 ## 🌐 Live Demo
 
-**[Visit Bookly](YOUR-LIVE-WEBSITE-URL)**
+**[Visit Bookly](https://bookly-bulc.onrender.com/)**
 
 ## ✨ Features
 
